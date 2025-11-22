@@ -1,4 +1,4 @@
-package com.viana.poc.model;
+package com.viana.poc.domain.model;
 
 public record Txn(
   String txnId, String userId, double amount, String currency,

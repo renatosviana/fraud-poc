@@ -1,5 +1,13 @@
-package com.viana.poc.app;
+package com.viana.poc;
 
+import com.viana.poc.adapter.messaging.EventBus;
+import com.viana.poc.adapter.messaging.RedisStreamsBus;
+import com.viana.poc.adapter.persistence.AlertRepo;
+import com.viana.poc.domain.service.Detector;
+import io.micrometer.core.instrument.MeterRegistry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,16 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class App implements CommandLineRunner {
 
-    @Override
-    public void run(String... args) throws Exception {
-        System.out.println("=== App started successfully ===");
-        // TODO: keep the rest of the logic commented out for now
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
-    }
-    /*
+    private static final Logger log = LoggerFactory.getLogger(App.class);
     private final Detector detector;
     private final AlertRepo repo;
     private final MeterRegistry metrics;
@@ -49,6 +48,6 @@ public class App implements CommandLineRunner {
                 e.printStackTrace();
             }
         }), "consumer").start();
-        System.out.println("Detector started. Consuming from stream: " + txStream);
-    }*/
+        log.info("Detector started. Consuming from stream: " + txStream);
+    }
 }

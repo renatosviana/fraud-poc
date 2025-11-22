@@ -3,7 +3,6 @@ package com.viana.poc.domain.model;
 import com.viana.poc.adapter.messaging.EventBus;
 import com.viana.poc.adapter.messaging.RedisStreamsBus;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.viana.poc.model.Txn;
 
 import java.util.Random;
 import java.util.UUID;
