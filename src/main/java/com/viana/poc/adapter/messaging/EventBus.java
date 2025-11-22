@@ -1,4 +1,4 @@
-package com.example.poc.bus;
+package com.viana.poc.adapter.messaging;
 
 import java.util.function.Consumer;
 

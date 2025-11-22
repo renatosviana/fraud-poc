@@ -1,8 +1,9 @@
-package com.example.poc.detect;
+package com.viana.poc.domain.model;
 
-import com.example.poc.bus.EventBus;
-import com.example.poc.bus.RedisStreamsBus;
+import com.viana.poc.adapter.messaging.EventBus;
+import com.viana.poc.adapter.messaging.RedisStreamsBus;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.viana.poc.model.Txn;
 
 import java.util.Random;
 import java.util.UUID;
@@ -26,7 +27,7 @@ public class TxnGenerator {
             double amt = Math.max(1, base + r.nextGaussian()*30);
             // occasionally inject “fraud-like” spikes
             if (r.nextDouble()<0.05) amt = 1500 + r.nextDouble()*1000;
-            var txn = new com.example.poc.model.Txn(
+            var txn = new Txn(
                 UUID.randomUUID().toString(), user, amt, "CAD",
                 System.currentTimeMillis(),
                 merchants[r.nextInt(merchants.length)],

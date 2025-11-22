@@ -1,5 +1,5 @@
-package com.example.poc.detect;
-import com.example.poc.store.AlertRepo;
+package com.viana.poc.domain.service;
+import com.viana.poc.adapter.persistence.AlertRepo;
 
 public class Detector {
     private final AlertRepo repo;

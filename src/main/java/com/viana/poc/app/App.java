@@ -1,11 +1,5 @@
-package com.example.poc;
+package com.viana.poc.app;
 
-import com.example.poc.bus.EventBus;
-import com.example.poc.bus.RedisStreamsBus;
-import com.example.poc.detect.Detector;
-import com.example.poc.store.AlertRepo;
-import io.micrometer.core.instrument.MeterRegistry;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

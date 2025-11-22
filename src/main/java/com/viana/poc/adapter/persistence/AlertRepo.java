@@ -1,4 +1,4 @@
-package com.example.poc.store;
+package com.viana.poc.adapter.persistence;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
