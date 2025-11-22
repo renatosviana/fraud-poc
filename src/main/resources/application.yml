@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/poc
+    username: poc
+    password: poc
+  sql:
+    init:
+      mode: always
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,prometheus,metrics"
+
+poc:
+  redis:
+    host: localhost
+    port: 6379
+  streams:
+    txStream: txns
+    alertStream: alerts
+  group: detector
+  consumer: c1
