@@ -113,8 +113,48 @@ com.viana.poc
 └── schema.sql
 ```
 
+8. Architecture / Sequence Diagram
 
-7. Notes
+sequenceDiagram
+autonumber
+
+    participant Gen as TxnGenerator<br/>(domain)
+    participant Bus as EventBus<br/>(port)
+    participant Redis as RedisStreamsBus<br/>(adapter)
+    participant Det as Detector<br/>(domain service)
+    participant Repo as AlertRepo<br/>(DB adapter)
+    participant DB as PostgreSQL
+
+    rect rgb(240,240,240)
+        note over Gen: Synthetic transaction generation loop
+        Gen->>Gen: Create Txn (userId, amount, country, ...)
+        Gen->>Bus: publish(txStream, txnJson)
+        note right of Bus: At runtime, Bus is<br/>implemented by RedisStreamsBus
+        Bus->>Redis: publish(txStream, txnJson)
+        Redis->>Redis: XADD txStream { data: txnJson }
+    end
+
+    par Consumer loop
+        note over Redis: Consumer group reading from txStream
+        Redis->>Redis: XREADGROUP txStream for group/consumer
+        Redis-->>Det: json = entry["data"]
+    and Fraud detection
+        note over Det: Domain logic – rules + stats
+        Det->>Det: parse json → Txn
+        Det->>Det: update running stats (per user)
+        Det->>Det: compute score + reasons
+        Det-->>Repo: if alert == true:<br/>save(txnId, userId, reasons, score)
+    end
+
+    rect rgb(240,240,240)
+        note over Repo,DB: Persistence adapter
+        Repo->>DB: INSERT INTO alerts(txn_id,user_id,reasons,score) VALUES (...)
+        DB-->>Repo: success
+        Repo-->>Det: (optional) ack
+    end
+
+
+9. Notes
 
 Detector uses Micrometer for alert metrics.
 
