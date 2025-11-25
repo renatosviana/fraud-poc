@@ -115,6 +115,7 @@ com.viana.poc
 
 8. Architecture / Sequence Diagram
 
+```mermaid
 sequenceDiagram
 autonumber
 
@@ -152,7 +153,7 @@ autonumber
         DB-->>Repo: success
         Repo-->>Det: (optional) ack
     end
-
+```
 
 9. Notes
 
