@@ -113,7 +113,7 @@ com.viana.poc
 └── schema.sql
 ```
 
-8. Architecture / Sequence Diagram
+7. Architecture / Sequence Diagram
 
 ```mermaid
 sequenceDiagram
@@ -155,7 +155,7 @@ autonumber
     end
 ```
 
-9. Notes
+8. Notes
 
 Detector uses Micrometer for alert metrics.
 
